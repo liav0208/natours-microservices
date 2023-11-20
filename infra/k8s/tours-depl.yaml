@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tours-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tours
+  template:
+    metadata:
+      labels:
+        app: tours
+    spec:
+      containers:
+        - name: tours
+          image: liav19960208/tours
+          resources:
+            limits:
+              memory: "256Mi"
+            requests:
+              memory: "128Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tours-srv
+spec:
+  selector:
+    app: tours
+  ports:
+    - name: tours
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
