@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tours-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tours-mongo
+  template:
+    metadata:
+      labels:
+        app: tours-mongo
+    spec:
+      containers:
+        - name: tours-mongo
+          image: mongo
+          resources:
+            limits:
+              memory: "256Mi"
+            requests:
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tours-mongo-srv
+spec:
+  selector:
+    app: tours-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

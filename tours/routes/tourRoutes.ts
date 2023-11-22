@@ -6,11 +6,11 @@ import {
   getTour,
   updateTour,
 } from "../controllers/tourController";
-import { checkParams } from "../middlewares/tourMiddleware";
+// import { checkParams } from "../middlewares/tourMiddleware";
 
 const router = express.Router();
 
-router.param("id", checkParams);
+// router.param("id", checkParams);
 
 router.route("/api/v1/tours").get(getAllTours).post(createTour);
 
